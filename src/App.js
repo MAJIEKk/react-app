@@ -1,24 +1,37 @@
-import logo from './logo.svg';
+/**@jsxImportSource @emotion/react*/
+import {css} from "@emotion/react";
+import notes from "./notes.json"
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+function ShowNote(data){
+  return(
+    <div className="noteMain">
+          <div className="noteNum">Заметка {data.data.id}</div>
+          <div className="noteTime">{data.data.date}</div>
+          <div className="noteDesc">{data.data.description}</div>
     </div>
+  )
+}
+function App() {
+  const note = notes.map((item)=> <ShowNote key={item.id} data={item}/>)
+  
+  return (
+  <div css={css`
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    `}>
+
+    <h2>Заметки</h2>
+    
+  <div css={css`
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  justify-content: center;
+  `}>{note}</div>
+  </div>
   );
 }
 
